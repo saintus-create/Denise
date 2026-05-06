@@ -1,0 +1,42 @@
+---
+import { Tick } from "@/components/ui/icons";
+import Link from "@/components/ui/link.astro";
+
+const { plan } = Astro.props;
+---
+
+<div>
+  <div
+    class="usa-card usa-card--flag">
+    <div class="usa-card__body">
+      <div class="text-center">
+        <h4 class="usa-card__heading text-lg font-medium text-gray-400">{plan.name}</h4><p
+          class="mt-3 text-4xl font-bold text-black md:text-4xl">
+          {
+            plan.price && typeof plan.price === "object"
+              ? plan.price.monthly
+              : plan.price
+          }
+        </p>
+      </div><ul class="usa-card__footer">
+        {
+          plan.features.map((item) => (
+            <li class="flex items-start gap-3 text-gray-800">
+              <Tick class="w-6 h-6" />
+              <span>{item}</span>
+            </li>
+          ))
+        }
+      </ul><div class="usa-card__footer">
+        <Link
+          href={plan.button.link || "#"}
+          block
+          style={plan.popular ? "primary" : "outline"}>
+          {plan.button.text || "Get Started"}
+        </Link>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>

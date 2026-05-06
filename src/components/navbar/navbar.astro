@@ -1,0 +1,108 @@
+---
+import Container from "@/components/container.astro";
+import Link from "@/components/ui/link.astro";
+import Dropdown from "./dropdown.astro";
+import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
+
+const menuitems = [
+  {
+    title: "Features",
+    path: "#",
+    children: [
+      { title: "Action", path: "/" },
+      { title: "Another action", path: "#" },
+      { title: "Dropdown Submenu", path: "#" },
+      { title: "404 Page", path: "/404" },
+    ],
+  },
+  {
+    title: "Pricing",
+    path: "/pricing",
+  },
+  {
+    title: "About",
+    path: "/about",
+  },
+  {
+    title: "Blog",
+    path: "/blog",
+  },
+  {
+    title: "Contact",
+    path: "/contact",
+  },
+  {
+    title: "Pro Version",
+    badge: true,
+    path: "https://astroship-pro.web3templates.com/",
+  },
+];
+---
+
+<Container>
+  <header class="usa-header usa-header--basic">
+    <div class="usa-nav-container">
+      <div class="usa-navbar">
+        <a href="/" class="usa-logo">
+          <span class="usa-logo__text text-normal">Astro</span><span class="usa-logo__text text-base-darker">ship</span>
+        </a>
+        <button class="usa-menu-btn">Menu</button>
+      </div>
+      <nav class="usa-nav">
+        <div class="usa-nav__inner">
+          <button class="usa-nav__close">
+            <img src="/close.svg" alt="close" />
+          </button>
+          <ul class="usa-nav__primary">
+            {
+              menuitems.map((item) => (
+                <>
+                  {item.children && (
+                    <li class="usa-nav__primary-item">
+                      <a
+                        href={item.path}
+                        class="usa-nav__link">
+                        <span>{item.title}</span>
+                      </a>
+                      <ul class="usa-nav__submenu">
+                        {
+                          item.children.map((child) => (
+                            <li class="usa-nav__submenu-item">
+                              <a href={child.path}>{child.title}</a>
+                            </li>
+                          ))
+                        }
+                      </ul>
+                    </li>
+                  )}
+                  {!item.children && (
+                    <li class="usa-nav__primary-item">
+                      <a
+                        href={item.path}
+                        class="usa-nav__link">
+                        <span> {item.title}</span>
+                        {item.badge && (
+                          <span class="ml-1 px-2 py-0.5 text-[10px] animate-pulse font-semibold uppercase text-white bg-indigo-600 rounded-full">
+                            New
+                          </span>
+                        )}
+                      </a>
+                    </li>
+                  )}
+                </>
+              ))
+            }
+          </ul>
+          <div class="usa-nav__secondary">
+            <div class="usa-nav__secondary-links">
+              <div class="usa-button-group">
+                <a href="#" class="usa-button usa-button--outline">Log in</a>
+                <a href="#" class="usa-button">Sign up</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+</Container>
